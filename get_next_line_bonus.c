@@ -111,12 +111,14 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	node = ft_get_node(&list, fd);
+	if (!node)
+		return (NULL);
 	if (read(fd, NULL, 0) < 0)
 		return (ft_remove_node(&list, fd));
 	if (!ft_is_in(node->stash, '\n'))
 		node->stash = ft_read_to_stash(fd, &(node->stash));
 	if (!(node->stash))
-		return (NULL);
+		return (ft_remove_node(&list, fd));
 	line = ft_line_from_stash(&(node->stash), &empty_stash);
 	if (!line)
 		return (ft_remove_node(&list, fd));

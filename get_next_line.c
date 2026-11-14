@@ -67,7 +67,7 @@ static char	*ft_read_to_stash(int fd, char **stash)
 	if (!buff)
 		return (ft_clear_stash(stash, NULL));
 	read_bytes = 1;
-	while ((!*stash || !ft_is_in(buff, '\n')) && read_bytes > 0)
+	while ((!*stash || !ft_is_in(*stash, '\n')) && read_bytes > 0)
 	{
 		read_bytes = read(fd, buff, BUFFER_SIZE);
 		if (read_bytes < 0)
